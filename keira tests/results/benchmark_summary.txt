@@ -1,0 +1,13 @@
+       dataset policy  net_utility  net_se  frac_oracle  hit_target  abandon  regret  spend  n_measure   sec  n
+crossed_barrel     ei        0.184   0.058        0.204       0.780    0.040   0.765  0.500     50.000 0.603 50
+crossed_barrel   mcts        0.297   0.067        0.330       0.580    0.100   1.121  0.193     19.260 1.901 50
+          p3ht     ei       -0.078   0.071       -0.087       0.520    0.020   0.396  0.500     50.000 0.314 50
+          p3ht   mcts        0.321   0.071        0.357       0.560    0.140   0.296  0.153     15.280 1.025 50
+    perovskite     ei       -0.428   0.040       -0.476       0.100    0.720   1.762  0.500     50.000 0.131 50
+    perovskite   mcts       -0.054   0.023       -0.060       0.040    0.940   1.038  0.088      8.800 0.489 50
+
+Paired difference in net utility, MCTS - GP-EI (same seeds):
+       dataset  diff    se     z  n
+crossed_barrel 0.113 0.091 1.246 50
+          p3ht 0.399 0.100 4.009 50
+    perovskite 0.374 0.048 7.829 50
