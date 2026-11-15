@@ -1,0 +1,82 @@
+       dataset        policy  net_utility  net_se  hit_target  abandon  n_measure   sec  n
+crossed_barrel            ei        0.184   0.058       0.780    0.040     50.000 0.453 50
+crossed_barrel     gate_easy        0.390   0.054       0.840    0.040     35.420 0.272 50
+crossed_barrel gate_easy_voi        0.346   0.063       0.740    0.040     29.800 0.300 50
+crossed_barrel     gate_hard        0.278   0.068       0.600    0.040     22.600 0.173 50
+crossed_barrel gate_hard_voi        0.299   0.065       0.640    0.040     24.460 0.219 50
+crossed_barrel          mcts        0.317   0.066       0.600    0.100     19.320 1.428 50
+crossed_barrel      voi_rule        0.159   0.069       0.420    0.100     17.080 0.111 50
+          p3ht            ei       -0.078   0.071       0.520    0.020     50.000 0.180 50
+          p3ht     gate_easy        0.146   0.075       0.540    0.020     29.580 0.105 50
+          p3ht gate_easy_voi        0.172   0.074       0.540    0.020     26.980 0.115 50
+          p3ht     gate_hard        0.206   0.076       0.460    0.020     15.620 0.053 50
+          p3ht gate_hard_voi        0.282   0.074       0.580    0.020     20.020 0.081 50
+          p3ht          mcts        0.318   0.071       0.560    0.140     15.640 0.822 50
+          p3ht      voi_rule        0.360   0.070       0.580    0.080     12.780 0.036 50
+    perovskite            ei       -0.428   0.040       0.100    0.720     50.000 0.118 50
+    perovskite     gate_easy       -0.397   0.045       0.120    0.680     48.540 0.114 50
+    perovskite gate_easy_voi       -0.356   0.053       0.160    0.660     48.200 0.132 50
+    perovskite     gate_hard       -0.319   0.056       0.160    0.580     43.740 0.100 50
+    perovskite gate_hard_voi       -0.320   0.058       0.160    0.600     44.020 0.120 50
+    perovskite          mcts       -0.036   0.026       0.060    0.920      8.760 0.368 50
+    perovskite      voi_rule       -0.045   0.032       0.060    0.860      9.080 0.014 50
+
+Paired difference in net utility, voi_rule - MCTS (same seeds):
+       dataset   diff    se      z  n
+crossed_barrel -0.158 0.085 -1.844 50
+          p3ht  0.043 0.093  0.458 50
+    perovskite -0.009 0.037 -0.247 50
+
+Paired difference in net utility, voi_rule - GP-EI (same seeds):
+       dataset   diff    se      z  n
+crossed_barrel -0.025 0.095 -0.261 50
+          p3ht  0.438 0.087  5.023 50
+    perovskite  0.383 0.045  8.468 50
+
+Paired difference in net utility, gate_easy - MCTS (same seeds):
+       dataset   diff    se      z  n
+crossed_barrel  0.073 0.081  0.898 50
+          p3ht -0.171 0.107 -1.597 50
+    perovskite -0.362 0.055 -6.637 50
+
+Paired difference in net utility, gate_easy - GP-EI (same seeds):
+       dataset  diff    se     z  n
+crossed_barrel 0.206 0.041 5.041 50
+          p3ht 0.224 0.077 2.917 50
+    perovskite 0.031 0.023 1.335 50
+
+Paired difference in net utility, gate_easy_voi - MCTS (same seeds):
+       dataset   diff    se      z  n
+crossed_barrel  0.029 0.090  0.326 50
+          p3ht -0.145 0.105 -1.379 50
+    perovskite -0.320 0.062 -5.189 50
+
+Paired difference in net utility, gate_easy_voi - GP-EI (same seeds):
+       dataset  diff    se     z  n
+crossed_barrel 0.162 0.066 2.463 50
+          p3ht 0.250 0.071 3.530 50
+    perovskite 0.072 0.038 1.906 50
+
+Paired difference in net utility, gate_hard - MCTS (same seeds):
+       dataset   diff    se      z  n
+crossed_barrel -0.039 0.079 -0.490 50
+          p3ht -0.112 0.115 -0.976 50
+    perovskite -0.284 0.064 -4.459 50
+
+Paired difference in net utility, gate_hard - GP-EI (same seeds):
+       dataset  diff    se     z  n
+crossed_barrel 0.094 0.084 1.124 50
+          p3ht 0.284 0.094 3.035 50
+    perovskite 0.109 0.050 2.188 50
+
+Paired difference in net utility, gate_hard_voi - MCTS (same seeds):
+       dataset   diff    se      z  n
+crossed_barrel -0.017 0.078 -0.224 50
+          p3ht -0.036 0.103 -0.346 50
+    perovskite -0.285 0.061 -4.677 50
+
+Paired difference in net utility, gate_hard_voi - GP-EI (same seeds):
+       dataset  diff    se     z  n
+crossed_barrel 0.115 0.080 1.449 50
+          p3ht 0.360 0.094 3.824 50
+    perovskite 0.108 0.051 2.118 50
