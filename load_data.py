@@ -52,3 +52,17 @@ def load_data():
                               'Instability index': 's'})
 
     return df1, df2, df3, df4, df5
+
+def split_data(data):
+    """
+    In:
+        data: df of data
+    Out:
+        train: df with just the train set
+        test: df with just the test set
+    """
+
+    train = data.sample(frac=0.8, random_state=123)
+    test = data.drop(train.index)
+
+    return train, test
