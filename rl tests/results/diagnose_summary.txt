@@ -1,0 +1,26 @@
+Held-out SYNTHETIC pools, 1000 seeds each
+
+pools        policy  net_utility  net_se  hit_target  abandon  n_measure    n
+ easy            ei        0.233   0.012       0.833    0.004     50.000 1000
+ easy     gate_easy        0.446   0.013       0.833    0.004     28.750 1000
+ easy gate_easy_voi        0.491   0.013       0.827    0.004     23.606 1000
+ easy     gate_hard        0.517   0.014       0.801    0.004     18.486 1000
+ easy gate_hard_voi        0.525   0.013       0.811    0.004     18.638 1000
+ easy      voi_rule        0.404   0.015       0.613    0.180     12.676 1000
+ hard            ei        0.035   0.015       0.633    0.017     50.000 1000
+ hard     gate_easy        0.133   0.016       0.638    0.017     40.652 1000
+ hard gate_easy_voi        0.188   0.017       0.643    0.017     35.621 1000
+ hard     gate_hard        0.246   0.017       0.644    0.017     29.986 1000
+ hard gate_hard_voi        0.259   0.017       0.642    0.017     28.467 1000
+ hard      voi_rule        0.229   0.015       0.455    0.242     14.991 1000
+
+Paired difference in net utility, gate - voi_rule (same synthetic pools):
+pools          gate   diff    se      z
+ easy     gate_easy  0.042 0.015  2.700
+ easy gate_easy_voi  0.087 0.014  6.150
+ easy     gate_hard  0.112 0.013  8.491
+ easy gate_hard_voi  0.121 0.012  9.786
+ hard     gate_easy -0.096 0.017 -5.758
+ hard gate_easy_voi -0.041 0.016 -2.556
+ hard     gate_hard  0.017 0.015  1.077
+ hard gate_hard_voi  0.030 0.014  2.071
