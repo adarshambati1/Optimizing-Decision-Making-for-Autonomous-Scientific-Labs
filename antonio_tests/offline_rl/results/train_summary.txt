@@ -1,0 +1,58 @@
+Trained on 2520 logged campaigns; offline estimates on 1080 held-out campaigns;
+ground truth from 1000 fresh campaigns per policy (made-up pools, seeds 81000000+).
+
+Model-free learners:
+{
+ "bc_voi": {
+  "train_rows": 4781,
+  "heldout_accuracy": 0.993260756868844,
+  "expert_continue_rate": 0.924492783936415
+ },
+ "bc_mcts": {
+  "train_rows": 2402,
+  "heldout_accuracy": 0.9584120982986768,
+  "expert_continue_rate": 0.9279766860949209
+ },
+ "batch_q": {
+  "train_rows": 30676,
+  "last_td_mse_or_change": 0.01590163895756458
+ },
+ "fitted_q": {
+  "train_rows": 30676,
+  "last_td_mse_or_change": 5.9206610050321906e-05
+ }
+}
+
+Reading models estimated from the log (per noise band):
+      kind  noise_lo  noise_hi  fail_prob  p_high_good  p_high_bad  n_readings  solve_sec
+       mle     0.000     0.250      0.103        0.835       0.037        6507     18.221
+       mle     0.250     0.350      0.099        0.777       0.049        6959     18.303
+       mle     0.350     0.450      0.105        0.725       0.060        6999     18.147
+       mle     0.450     0.600      0.100        0.761       0.077        8055     18.555
+       mle     0.600     1.000      0.097        0.677       0.087        7196     18.291
+bayes_mean     0.000     0.250      0.103        0.834       0.037        6507     18.432
+bayes_mean     0.250     0.350      0.099        0.776       0.049        6959     18.405
+bayes_mean     0.350     0.450      0.105        0.725       0.061        6999     18.370
+bayes_mean     0.450     0.600      0.100        0.760       0.078        8055     18.008
+bayes_mean     0.600     1.000      0.097        0.677       0.087        7196     18.174
+bayes_pess     0.000     0.250      0.109        0.809       0.041        6507     14.610
+bayes_pess     0.250     0.350      0.105        0.749       0.054        6959     14.511
+bayes_pess     0.350     0.450      0.111        0.697       0.066        6999     14.468
+bayes_pess     0.450     0.600      0.106        0.734       0.083        8055     14.513
+bayes_pess     0.600     1.000      0.103        0.641       0.093        7196     14.411
+
+Every policy, true net utility vs. its importance-sampling estimate (blank: not estimable from the log):
+                    policy  true_net  true_se  is_ordinary  is_se  is_weighted  is_per_decision    ess  experiments   hit  abandon
+                      gate     0.383    0.016        0.254  0.058        0.483            0.134 31.356       24.252 0.724    0.017
+          learned_fitted_q     0.378    0.016        0.242  0.059        0.511            0.081 24.473       24.107 0.718    0.015
+           learned_batch_q     0.370    0.016        0.297  0.071        0.475            0.160 28.763       24.530 0.714    0.017
+           learned_bc_mcts     0.339    0.015        0.306  0.172        0.288            0.330 11.102       21.543 0.641    0.137
+            learned_bc_voi     0.308    0.015        0.241  0.051        0.351            0.186 44.267       14.878 0.537    0.196
+                  voi_rule     0.288    0.016        0.203  0.045        0.318            0.144 44.136       14.411 0.511    0.214
+     model_bayes_mean_full     0.236    0.015                                                                25.114 0.561    0.264
+       model_mle_stop_only     0.229    0.015                                                                26.060 0.564    0.258
+model_bayes_mean_stop_only     0.229    0.015                                                                25.843 0.561    0.265
+model_bayes_pess_stop_only     0.224    0.015                                                                24.474 0.540    0.287
+            model_mle_full     0.216    0.015                                                                25.876 0.549    0.257
+     model_bayes_pess_full     0.214    0.015                                                                24.658 0.533    0.280
+                        ei     0.138    0.014        0.008  0.022        0.030           -0.195 34.990       50.000 0.736    0.018

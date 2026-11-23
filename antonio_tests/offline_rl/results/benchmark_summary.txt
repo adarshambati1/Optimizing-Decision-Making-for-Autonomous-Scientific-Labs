@@ -1,0 +1,189 @@
+250 paired seeds per dataset; learned policies trained on made-up pools only
+
+       dataset                     policy  net_utility  net_se  hit_target  abandon  n_measure   sec   n
+crossed_barrel            learned_bc_mcts        0.392   0.029       0.748    0.024     25.876 0.717 250
+crossed_barrel                       gate        0.377   0.030       0.704    0.008     22.784 0.640 250
+crossed_barrel            learned_batch_q        0.361   0.031       0.684    0.008     22.404 0.621 250
+crossed_barrel           learned_fitted_q        0.340   0.031       0.656    0.008     21.716 0.592 250
+crossed_barrel             learned_bc_voi        0.315   0.031       0.584    0.064     17.512 0.416 250
+crossed_barrel model_bayes_pess_stop_only        0.315   0.028       0.736    0.088     32.984 0.919 250
+crossed_barrel model_bayes_mean_stop_only        0.312   0.028       0.736    0.088     33.284 0.910 250
+crossed_barrel        model_mle_stop_only        0.312   0.028       0.736    0.088     33.292 0.904 250
+crossed_barrel                   voi_rule        0.298   0.032       0.560    0.076     16.928 0.415 250
+crossed_barrel      model_bayes_mean_full        0.297   0.029       0.708    0.100     32.060 0.870 250
+crossed_barrel      model_bayes_pess_full        0.294   0.029       0.712    0.068     32.460 0.874 250
+crossed_barrel                       mcts        0.293   0.030       0.592    0.092     20.808 5.450 250
+crossed_barrel             model_mle_full        0.280   0.029       0.688    0.104     31.868 0.863 250
+crossed_barrel                         ei        0.201   0.025       0.800    0.008     50.000 1.375 250
+          p3ht                   voi_rule        0.388   0.031       0.616    0.088     13.644 0.027 250
+          p3ht             learned_bc_voi        0.384   0.031       0.616    0.084     14.032 0.030 250
+          p3ht            learned_bc_mcts        0.350   0.032       0.636    0.068     19.264 0.048 250
+          p3ht                       gate        0.308   0.034       0.604    0.016     19.740 0.052 250
+          p3ht                       mcts        0.283   0.032       0.532    0.128     16.156 0.731 250
+          p3ht            learned_batch_q        0.276   0.034       0.600    0.016     22.540 0.062 250
+          p3ht           learned_fitted_q        0.275   0.034       0.596    0.016     22.256 0.059 250
+          p3ht      model_bayes_pess_full        0.082   0.029       0.524    0.136     35.576 0.118 250
+          p3ht model_bayes_mean_stop_only        0.064   0.030       0.540    0.084     38.480 0.127 250
+          p3ht        model_mle_stop_only        0.064   0.030       0.540    0.084     38.480 0.124 250
+          p3ht model_bayes_pess_stop_only        0.061   0.030       0.528    0.100     37.744 0.121 250
+          p3ht             model_mle_full        0.047   0.030       0.496    0.152     36.448 0.117 250
+          p3ht      model_bayes_mean_full        0.020   0.030       0.460    0.136     35.380 0.113 250
+          p3ht                         ei       -0.054   0.031       0.544    0.016     50.000 0.145 250
+    perovskite             learned_bc_voi       -0.060   0.014       0.056    0.856     10.168 0.041 250
+    perovskite                   voi_rule       -0.061   0.014       0.052    0.852      9.832 0.040 250
+    perovskite                       mcts       -0.076   0.009       0.028    0.908      9.432 1.114 250
+    perovskite            learned_bc_mcts       -0.083   0.015       0.068    0.868     13.788 0.069 250
+    perovskite      model_bayes_mean_full       -0.086   0.009       0.024    0.936     10.368 0.049 250
+    perovskite             model_mle_full       -0.099   0.009       0.012    0.936     10.472 0.048 250
+    perovskite      model_bayes_pess_full       -0.100   0.008       0.004    0.936      9.736 0.043 250
+    perovskite model_bayes_mean_stop_only       -0.103   0.011       0.032    0.908     12.584 0.065 250
+    perovskite        model_mle_stop_only       -0.103   0.011       0.032    0.908     12.616 0.066 250
+    perovskite model_bayes_pess_stop_only       -0.104   0.011       0.028    0.912     12.272 0.061 250
+    perovskite            learned_batch_q       -0.284   0.028       0.160    0.652     40.900 0.251 250
+    perovskite           learned_fitted_q       -0.293   0.027       0.148    0.644     40.540 0.252 250
+    perovskite                       gate       -0.297   0.027       0.164    0.676     42.896 0.255 250
+    perovskite                         ei       -0.440   0.016       0.084    0.764     50.000 0.258 250
+
+Paired difference in net utility, policy - one-step rule (same seeds):
+       dataset                     policy   diff    se      z   n
+crossed_barrel            learned_bc_mcts  0.093 0.028  3.347 250
+crossed_barrel            learned_batch_q  0.062 0.023  2.775 250
+crossed_barrel           learned_fitted_q  0.041 0.023  1.815 250
+crossed_barrel             learned_bc_voi  0.017 0.012  1.450 250
+crossed_barrel model_bayes_pess_stop_only  0.017 0.033  0.506 250
+crossed_barrel model_bayes_mean_stop_only  0.014 0.033  0.415 250
+crossed_barrel        model_mle_stop_only  0.014 0.033  0.412 250
+crossed_barrel      model_bayes_mean_full -0.001 0.037 -0.025 250
+crossed_barrel      model_bayes_pess_full -0.004 0.038 -0.109 250
+crossed_barrel             model_mle_full -0.019 0.042 -0.442 250
+          p3ht             learned_bc_voi -0.004 0.012 -0.348 250
+          p3ht            learned_bc_mcts -0.038 0.025 -1.513 250
+          p3ht            learned_batch_q -0.112 0.027 -4.185 250
+          p3ht           learned_fitted_q -0.113 0.026 -4.279 250
+          p3ht      model_bayes_pess_full -0.307 0.041 -7.402 250
+          p3ht        model_mle_stop_only -0.325 0.033 -9.791 250
+          p3ht model_bayes_mean_stop_only -0.325 0.033 -9.791 250
+          p3ht model_bayes_pess_stop_only -0.328 0.033 -9.928 250
+          p3ht             model_mle_full -0.342 0.041 -8.370 250
+          p3ht      model_bayes_mean_full -0.369 0.040 -9.197 250
+    perovskite             learned_bc_voi  0.001 0.004  0.281 250
+    perovskite            learned_bc_mcts -0.022 0.013 -1.650 250
+    perovskite      model_bayes_mean_full -0.025 0.018 -1.419 250
+    perovskite             model_mle_full -0.038 0.017 -2.199 250
+    perovskite      model_bayes_pess_full -0.039 0.017 -2.212 250
+    perovskite model_bayes_mean_stop_only -0.042 0.017 -2.448 250
+    perovskite        model_mle_stop_only -0.042 0.017 -2.466 250
+    perovskite model_bayes_pess_stop_only -0.042 0.017 -2.535 250
+    perovskite            learned_batch_q -0.223 0.026 -8.600 250
+    perovskite           learned_fitted_q -0.232 0.027 -8.687 250
+
+Paired difference in net utility, policy - MCTS (same seeds):
+       dataset                     policy   diff    se      z   n
+crossed_barrel            learned_bc_mcts  0.099 0.041  2.406 250
+crossed_barrel            learned_batch_q  0.068 0.041  1.644 250
+crossed_barrel           learned_fitted_q  0.047 0.042  1.109 250
+crossed_barrel             learned_bc_voi  0.022 0.041  0.536 250
+crossed_barrel model_bayes_pess_stop_only  0.022 0.041  0.530 250
+crossed_barrel model_bayes_mean_stop_only  0.019 0.041  0.457 250
+crossed_barrel        model_mle_stop_only  0.019 0.041  0.455 250
+crossed_barrel      model_bayes_mean_full  0.004 0.043  0.101 250
+crossed_barrel      model_bayes_pess_full  0.001 0.038  0.028 250
+crossed_barrel             model_mle_full -0.013 0.039 -0.340 250
+          p3ht             learned_bc_voi  0.101 0.040  2.543 250
+          p3ht            learned_bc_mcts  0.067 0.042  1.603 250
+          p3ht            learned_batch_q -0.007 0.044 -0.158 250
+          p3ht           learned_fitted_q -0.008 0.044 -0.187 250
+          p3ht      model_bayes_pess_full -0.201 0.043 -4.634 250
+          p3ht        model_mle_stop_only -0.220 0.043 -5.107 250
+          p3ht model_bayes_mean_stop_only -0.220 0.043 -5.107 250
+          p3ht model_bayes_pess_stop_only -0.223 0.043 -5.189 250
+          p3ht             model_mle_full -0.237 0.043 -5.524 250
+          p3ht      model_bayes_mean_full -0.263 0.044 -6.043 250
+    perovskite             learned_bc_voi  0.015 0.015  1.017 250
+    perovskite            learned_bc_mcts -0.008 0.018 -0.423 250
+    perovskite      model_bayes_mean_full -0.011 0.014 -0.754 250
+    perovskite             model_mle_full -0.024 0.013 -1.758 250
+    perovskite      model_bayes_pess_full -0.024 0.013 -1.930 250
+    perovskite model_bayes_mean_stop_only -0.028 0.015 -1.837 250
+    perovskite        model_mle_stop_only -0.028 0.015 -1.858 250
+    perovskite model_bayes_pess_stop_only -0.028 0.015 -1.896 250
+    perovskite            learned_batch_q -0.208 0.028 -7.422 250
+    perovskite           learned_fitted_q -0.217 0.027 -8.054 250
+
+Paired difference in net utility, policy - Adarsh's gate (same seeds):
+       dataset                     policy   diff    se      z   n
+crossed_barrel            learned_bc_mcts  0.015 0.021  0.714 250
+crossed_barrel            learned_batch_q -0.016 0.017 -0.930 250
+crossed_barrel           learned_fitted_q -0.037 0.019 -1.914 250
+crossed_barrel             learned_bc_voi -0.062 0.025 -2.440 250
+crossed_barrel model_bayes_pess_stop_only -0.062 0.029 -2.106 250
+crossed_barrel model_bayes_mean_stop_only -0.065 0.029 -2.208 250
+crossed_barrel        model_mle_stop_only -0.065 0.029 -2.210 250
+crossed_barrel      model_bayes_mean_full -0.080 0.039 -2.049 250
+crossed_barrel      model_bayes_pess_full -0.083 0.037 -2.243 250
+crossed_barrel             model_mle_full -0.097 0.042 -2.325 250
+          p3ht             learned_bc_voi  0.076 0.026  2.945 250
+          p3ht            learned_bc_mcts  0.042 0.025  1.655 250
+          p3ht            learned_batch_q -0.032 0.020 -1.597 250
+          p3ht           learned_fitted_q -0.033 0.020 -1.642 250
+          p3ht      model_bayes_pess_full -0.226 0.043 -5.320 250
+          p3ht        model_mle_stop_only -0.245 0.033 -7.513 250
+          p3ht model_bayes_mean_stop_only -0.245 0.033 -7.513 250
+          p3ht model_bayes_pess_stop_only -0.248 0.033 -7.531 250
+          p3ht             model_mle_full -0.261 0.040 -6.487 250
+          p3ht      model_bayes_mean_full -0.288 0.041 -6.974 250
+    perovskite             learned_bc_voi  0.237 0.023 10.487 250
+    perovskite            learned_bc_mcts  0.214 0.024  9.025 250
+    perovskite      model_bayes_mean_full  0.211 0.029  7.192 250
+    perovskite             model_mle_full  0.198 0.030  6.644 250
+    perovskite      model_bayes_pess_full  0.198 0.030  6.687 250
+    perovskite model_bayes_mean_stop_only  0.194 0.029  6.804 250
+    perovskite        model_mle_stop_only  0.194 0.029  6.794 250
+    perovskite model_bayes_pess_stop_only  0.194 0.028  6.841 250
+    perovskite            learned_batch_q  0.014 0.022  0.629 250
+    perovskite           learned_fitted_q  0.004 0.024  0.179 250
+
+Paired difference in net utility, policy - GP-EI (same seeds):
+       dataset                     policy  diff    se      z   n
+crossed_barrel            learned_bc_mcts 0.191 0.028  6.777 250
+crossed_barrel            learned_batch_q 0.160 0.031  5.114 250
+crossed_barrel           learned_fitted_q 0.139 0.032  4.405 250
+crossed_barrel             learned_bc_voi 0.114 0.035  3.233 250
+crossed_barrel model_bayes_pess_stop_only 0.114 0.020  5.596 250
+crossed_barrel model_bayes_mean_stop_only 0.111 0.020  5.423 250
+crossed_barrel        model_mle_stop_only 0.111 0.020  5.419 250
+crossed_barrel      model_bayes_mean_full 0.097 0.038  2.563 250
+crossed_barrel      model_bayes_pess_full 0.093 0.037  2.531 250
+crossed_barrel             model_mle_full 0.079 0.039  2.047 250
+          p3ht             learned_bc_voi 0.438 0.035 12.662 250
+          p3ht            learned_bc_mcts 0.405 0.029 14.083 250
+          p3ht            learned_batch_q 0.331 0.030 11.038 250
+          p3ht           learned_fitted_q 0.329 0.030 10.887 250
+          p3ht      model_bayes_pess_full 0.136 0.042  3.212 250
+          p3ht        model_mle_stop_only 0.118 0.018  6.421 250
+          p3ht model_bayes_mean_stop_only 0.118 0.018  6.421 250
+          p3ht model_bayes_pess_stop_only 0.115 0.019  5.982 250
+          p3ht             model_mle_full 0.101 0.041  2.457 250
+          p3ht      model_bayes_mean_full 0.074 0.044  1.693 250
+    perovskite             learned_bc_voi 0.380 0.020 19.156 250
+    perovskite            learned_bc_mcts 0.357 0.020 18.259 250
+    perovskite      model_bayes_mean_full 0.354 0.018 19.365 250
+    perovskite             model_mle_full 0.340 0.019 18.319 250
+    perovskite      model_bayes_pess_full 0.340 0.019 18.082 250
+    perovskite model_bayes_mean_stop_only 0.337 0.017 19.583 250
+    perovskite        model_mle_stop_only 0.336 0.017 19.561 250
+    perovskite model_bayes_pess_stop_only 0.336 0.017 19.325 250
+    perovskite            learned_batch_q 0.156 0.027  5.773 250
+    perovskite           learned_fitted_q 0.147 0.026  5.592 250
+
+Offline estimate (weighted IS on the made-up-pool log) vs. true net utility,
+on made-up pools and on each real dataset:
+dataset           crossed_barrel   p3ht  perovskite  made_up_pools_true  log_estimate_wis
+policy                                                                                   
+ei                         0.201 -0.054      -0.440               0.138             0.030
+gate                       0.377  0.308      -0.297               0.383             0.483
+learned_batch_q            0.361  0.276      -0.284               0.370             0.475
+learned_bc_mcts            0.392  0.350      -0.083               0.339             0.288
+learned_bc_voi             0.315  0.384      -0.060               0.308             0.351
+learned_fitted_q           0.340  0.275      -0.293               0.378             0.511
+voi_rule                   0.298  0.388      -0.061               0.288             0.318

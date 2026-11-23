@@ -1,5 +1,7 @@
 # Offline POMDP solvers on the autonomous-lab problem
 
+> **See also [`offline_rl/`](offline_rl/README.md):** five offline RL methods from the textbook (importance sampling, behavioral cloning, batch Q-learning, and learned models), trained on logged campaigns.
+
 Benchmarks the nine offline belief-state planning methods from *Algorithms for
 Decision Making*, ch. 21, against GP-EI, MCTS (Keira) and the one-step rule
 (Adarsh), in Keira's simulator with her default task and the same 250 seeds
