@@ -1,0 +1,127 @@
+       dataset                policy  net_utility  net_se  hit_target  abandon  n_measure   sec   n
+crossed_barrel pomdp_sawtooth_search        0.325   0.029       0.692    0.116     27.884 0.233 250
+crossed_barrel              voi_rule        0.298   0.032       0.560    0.076     16.928 0.128 250
+crossed_barrel             pomdp_fib        0.297   0.029       0.760    0.024     36.516 0.314 250
+crossed_barrel                  mcts        0.293   0.030       0.592    0.092     20.808 1.589 250
+crossed_barrel            pomdp_qmdp        0.286   0.030       0.748    0.020     36.416 0.306 250
+crossed_barrel pomdp_point_selection        0.277   0.029       0.640    0.156     27.836 0.224 250
+crossed_barrel            pomdp_pbvi        0.275   0.029       0.636    0.184     27.912 0.229 250
+crossed_barrel    pomdp_triangulated        0.274   0.028       0.776    0.016     40.396 0.366 250
+crossed_barrel        pomdp_sawtooth        0.273   0.027       0.784    0.012     41.260 0.390 250
+crossed_barrel         pomdp_perseus        0.234   0.029       0.588    0.200     27.384 0.221 250
+crossed_barrel                    ei        0.201   0.025       0.800    0.008     50.000 0.409 250
+crossed_barrel      pomdp_fast_lower        0.189   0.029       0.372    0.324     11.508 0.066 250
+          p3ht              voi_rule        0.388   0.031       0.616    0.088     13.644 0.036 250
+          p3ht      pomdp_fast_lower        0.378   0.031       0.580    0.180     12.012 0.027 250
+          p3ht                  mcts        0.283   0.032       0.532    0.128     16.156 0.916 250
+          p3ht             pomdp_fib        0.077   0.031       0.576    0.056     40.456 0.162 250
+          p3ht         pomdp_perseus        0.063   0.029       0.484    0.180     33.852 0.134 250
+          p3ht pomdp_sawtooth_search        0.058   0.029       0.524    0.108     37.716 0.158 250
+          p3ht pomdp_point_selection        0.056   0.029       0.500    0.144     35.804 0.150 250
+          p3ht            pomdp_qmdp        0.039   0.031       0.528    0.048     39.420 0.158 250
+          p3ht            pomdp_pbvi        0.036   0.030       0.472    0.140     34.960 0.140 250
+          p3ht    pomdp_triangulated        0.024   0.029       0.544    0.064     42.684 0.184 250
+          p3ht        pomdp_sawtooth        0.023   0.030       0.548    0.036     42.888 0.202 250
+          p3ht                    ei       -0.054   0.031       0.544    0.016     50.000 0.191 250
+    perovskite      pomdp_fast_lower       -0.054   0.007       0.012    0.956      6.208 0.007 250
+    perovskite            pomdp_pbvi       -0.059   0.007       0.016    0.964      7.148 0.009 250
+    perovskite              voi_rule       -0.061   0.014       0.052    0.852      9.832 0.015 250
+    perovskite pomdp_point_selection       -0.063   0.010       0.028    0.920      8.304 0.013 250
+    perovskite         pomdp_perseus       -0.070   0.006       0.008    0.952      7.296 0.010 250
+    perovskite                  mcts       -0.076   0.009       0.028    0.908      9.432 0.399 250
+    perovskite pomdp_sawtooth_search       -0.080   0.009       0.016    0.948      9.124 0.015 250
+    perovskite             pomdp_fib       -0.109   0.012       0.052    0.904     15.112 0.029 250
+    perovskite            pomdp_qmdp       -0.126   0.012       0.028    0.884     14.220 0.026 250
+    perovskite    pomdp_triangulated       -0.157   0.012       0.032    0.884     17.720 0.039 250
+    perovskite        pomdp_sawtooth       -0.161   0.013       0.032    0.900     18.300 0.045 250
+    perovskite                    ei       -0.440   0.016       0.084    0.764     50.000 0.101 250
+
+Paired difference in net utility, method - MCTS (same seeds):
+       dataset          method   diff    se      z   n
+crossed_barrel sawtooth_search  0.032 0.039  0.811 250
+crossed_barrel             fib  0.004 0.040  0.103 250
+crossed_barrel            qmdp -0.007 0.040 -0.181 250
+crossed_barrel point_selection -0.016 0.041 -0.387 250
+crossed_barrel            pbvi -0.018 0.041 -0.436 250
+crossed_barrel    triangulated -0.019 0.041 -0.476 250
+crossed_barrel        sawtooth -0.021 0.039 -0.531 250
+crossed_barrel         perseus -0.059 0.039 -1.518 250
+crossed_barrel      fast_lower -0.104 0.039 -2.674 250
+          p3ht      fast_lower  0.095 0.044  2.136 250
+          p3ht             fib -0.206 0.043 -4.795 250
+          p3ht         perseus -0.220 0.043 -5.147 250
+          p3ht sawtooth_search -0.226 0.044 -5.186 250
+          p3ht point_selection -0.227 0.041 -5.478 250
+          p3ht            qmdp -0.245 0.043 -5.625 250
+          p3ht            pbvi -0.247 0.043 -5.785 250
+          p3ht    triangulated -0.260 0.045 -5.830 250
+          p3ht        sawtooth -0.261 0.041 -6.322 250
+    perovskite      fast_lower  0.021 0.012  1.752 250
+    perovskite            pbvi  0.016 0.012  1.324 250
+    perovskite point_selection  0.012 0.014  0.890 250
+    perovskite         perseus  0.006 0.009  0.611 250
+    perovskite sawtooth_search -0.005 0.013 -0.374 250
+    perovskite             fib -0.033 0.016 -2.095 250
+    perovskite            qmdp -0.050 0.015 -3.247 250
+    perovskite    triangulated -0.081 0.016 -5.039 250
+    perovskite        sawtooth -0.085 0.015 -5.610 250
+
+Paired difference in net utility, method - one-step rule (same seeds):
+       dataset          method   diff    se      z   n
+crossed_barrel sawtooth_search  0.026 0.040  0.662 250
+crossed_barrel             fib -0.001 0.041 -0.026 250
+crossed_barrel            qmdp -0.012 0.041 -0.306 250
+crossed_barrel point_selection -0.021 0.040 -0.528 250
+crossed_barrel            pbvi -0.023 0.041 -0.564 250
+crossed_barrel    triangulated -0.025 0.042 -0.584 250
+crossed_barrel        sawtooth -0.026 0.041 -0.635 250
+crossed_barrel         perseus -0.064 0.040 -1.612 250
+crossed_barrel      fast_lower -0.109 0.037 -2.934 250
+          p3ht      fast_lower -0.010 0.039 -0.267 250
+          p3ht             fib -0.311 0.041 -7.590 250
+          p3ht         perseus -0.325 0.039 -8.254 250
+          p3ht sawtooth_search -0.331 0.041 -8.019 250
+          p3ht point_selection -0.332 0.040 -8.332 250
+          p3ht            qmdp -0.350 0.044 -7.974 250
+          p3ht            pbvi -0.352 0.040 -8.895 250
+          p3ht    triangulated -0.365 0.041 -8.832 250
+          p3ht        sawtooth -0.366 0.041 -8.866 250
+    perovskite      fast_lower  0.007 0.015  0.439 250
+    perovskite            pbvi  0.002 0.015  0.135 250
+    perovskite point_selection -0.002 0.016 -0.121 250
+    perovskite         perseus -0.009 0.015 -0.578 250
+    perovskite sawtooth_search -0.019 0.017 -1.137 250
+    perovskite             fib -0.048 0.020 -2.385 250
+    perovskite            qmdp -0.065 0.020 -3.248 250
+    perovskite    triangulated -0.096 0.020 -4.803 250
+    perovskite        sawtooth -0.100 0.019 -5.240 250
+
+Paired difference in net utility, method - GP-EI (same seeds):
+       dataset          method   diff    se      z   n
+crossed_barrel sawtooth_search  0.124 0.036  3.471 250
+crossed_barrel             fib  0.096 0.036  2.670 250
+crossed_barrel            qmdp  0.085 0.036  2.375 250
+crossed_barrel point_selection  0.076 0.037  2.045 250
+crossed_barrel            pbvi  0.074 0.036  2.041 250
+crossed_barrel    triangulated  0.073 0.037  1.954 250
+crossed_barrel        sawtooth  0.072 0.039  1.849 250
+crossed_barrel         perseus  0.033 0.037  0.906 250
+crossed_barrel      fast_lower -0.011 0.039 -0.295 250
+          p3ht      fast_lower  0.432 0.041 10.536 250
+          p3ht             fib  0.131 0.039  3.337 250
+          p3ht         perseus  0.118 0.042  2.809 250
+          p3ht sawtooth_search  0.112 0.041  2.746 250
+          p3ht point_selection  0.111 0.041  2.694 250
+          p3ht            qmdp  0.093 0.043  2.178 250
+          p3ht            pbvi  0.091 0.040  2.269 250
+          p3ht    triangulated  0.078 0.042  1.861 250
+          p3ht        sawtooth  0.077 0.040  1.910 250
+    perovskite      fast_lower  0.385 0.018 21.593 250
+    perovskite            pbvi  0.381 0.018 21.341 250
+    perovskite point_selection  0.377 0.020 19.187 250
+    perovskite         perseus  0.370 0.017 22.148 250
+    perovskite sawtooth_search  0.359 0.018 20.148 250
+    perovskite             fib  0.331 0.020 16.498 250
+    perovskite            qmdp  0.314 0.020 15.367 250
+    perovskite    triangulated  0.283 0.020 14.413 250
+    perovskite        sawtooth  0.279 0.022 12.601 250

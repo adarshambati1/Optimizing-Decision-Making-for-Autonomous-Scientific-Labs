@@ -1,0 +1,37 @@
+Abstraction: 4 slots, horizon 10 (177 states, 9 actions, 3 observations)
+100 test beliefs at the full horizon, 20 rollouts each
+
+       dataset          method   kind  offline_sec  size  bound_at_test  policy_value  policy_se
+          p3ht            qmdp  upper       0.0004     9         0.6860        0.6221     0.0093
+          p3ht             fib  upper       0.0930     9         0.6860        0.6213     0.0093
+          p3ht      fast_lower  lower       0.0011     9         0.5080        0.6115     0.0098
+          p3ht            pbvi  lower      20.6864   235         0.6337        0.6498     0.0090
+          p3ht         perseus  lower      15.4682   234         0.6335        0.6266     0.0093
+          p3ht        sawtooth  upper       7.6824   477         0.6928        0.5990     0.0092
+          p3ht point_selection  lower      21.1163   221         0.6374        0.6441     0.0091
+          p3ht sawtooth_search  lower      13.9389   728         0.6355        0.6397     0.0092
+          p3ht    triangulated approx       6.3563  8976         0.6832        0.6048     0.0092
+    perovskite            qmdp  upper       0.0018     9         0.6860        0.5431     0.0100
+    perovskite             fib  upper       0.1066     9         0.6860        0.5421     0.0101
+    perovskite      fast_lower  lower       0.0031     9         0.5080        0.5587     0.0105
+    perovskite            pbvi  lower      20.8794   209         0.5683        0.5919     0.0100
+    perovskite         perseus  lower      12.5891   202         0.5701        0.5932     0.0100
+    perovskite        sawtooth  upper       7.0076   477         0.6925        0.5206     0.0101
+    perovskite point_selection  lower      21.2540   214         0.5735        0.5779     0.0102
+    perovskite sawtooth_search  lower      14.4291   704         0.5704        0.5995     0.0099
+    perovskite    triangulated approx       6.3064  8976         0.6700        0.5057     0.0104
+crossed_barrel            qmdp  upper       0.0021     9         0.6860        0.5713     0.0098
+crossed_barrel             fib  upper       0.0805     9         0.6860        0.5482     0.0101
+crossed_barrel      fast_lower  lower       0.0048     9         0.5080        0.5759     0.0103
+crossed_barrel            pbvi  lower      19.7392   219         0.5848        0.6018     0.0098
+crossed_barrel         perseus  lower      14.1252   211         0.5861        0.5982     0.0099
+crossed_barrel        sawtooth  upper       8.1337   477         0.6926        0.5435     0.0099
+crossed_barrel point_selection  lower      18.8727   225         0.5901        0.5908     0.0099
+crossed_barrel sawtooth_search  lower      12.8558   706         0.5876        0.6171     0.0096
+crossed_barrel    triangulated approx       6.4167  8976         0.6748        0.5326     0.0100
+
+Sawtooth heuristic search, both bounds at the test beliefs:
+       dataset  bound_at_test  search_upper_at_test  search_final_gap
+          p3ht         0.6355                0.6910            0.0404
+    perovskite         0.5704                0.6898            0.0983
+crossed_barrel         0.5876                0.6903            0.0828
