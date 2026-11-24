@@ -1,0 +1,145 @@
+       dataset         policy  net_utility  net_se  hit_target  abandon  n_measure   sec   n
+crossed_barrel        mcts_ei        0.339   0.031       0.640    0.072     20.808 1.253 250
+crossed_barrel         voi_ei        0.298   0.032       0.560    0.076     16.928 0.141 250
+crossed_barrel    mcts_greedy        0.296   0.033       0.628    0.052     23.744 1.451 250
+crossed_barrel      mcts_mcts        0.293   0.030       0.592    0.092     20.808 1.254 250
+crossed_barrel       voi_ucb1        0.290   0.032       0.584    0.072     20.112 0.182 250
+crossed_barrel     voi_greedy        0.284   0.033       0.592    0.052     21.296 0.198 250
+crossed_barrel  mcts_quantile        0.278   0.032       0.560    0.084     19.088 1.160 250
+crossed_barrel      mcts_ucb1        0.274   0.031       0.612    0.088     24.720 1.423 250
+crossed_barrel   voi_quantile        0.257   0.032       0.512    0.088     16.392 0.134 250
+crossed_barrel   voi_thompson        0.254   0.031       0.612    0.076     26.548 0.401 250
+crossed_barrel  mcts_thompson        0.210   0.032       0.608    0.076     30.516 1.990 250
+crossed_barrel       never_ei        0.201   0.025       0.800    0.008     50.000 0.502 250
+crossed_barrel never_quantile        0.148   0.027       0.748    0.004     50.000 0.501 250
+crossed_barrel     never_ucb1        0.120   0.028       0.720    0.000     50.000 0.498 250
+crossed_barrel never_thompson        0.088   0.029       0.688    0.004     50.000 0.762 250
+crossed_barrel   never_greedy        0.076   0.029       0.672    0.036     50.000 0.504 250
+          p3ht         voi_ei        0.388   0.031       0.616    0.088     13.644 0.028 250
+          p3ht        mcts_ei        0.350   0.031       0.588    0.120     15.016 0.700 250
+          p3ht  mcts_quantile        0.338   0.031       0.580    0.100     15.184 0.693 250
+          p3ht   voi_quantile        0.317   0.031       0.548    0.092     13.980 0.029 250
+          p3ht      mcts_mcts        0.283   0.032       0.532    0.128     16.156 0.726 250
+          p3ht   voi_thompson        0.274   0.033       0.584    0.052     21.488 0.062 250
+          p3ht  mcts_thompson        0.238   0.032       0.540    0.072     20.872 0.965 250
+          p3ht       voi_ucb1        0.232   0.034       0.568    0.068     24.316 0.066 250
+          p3ht      mcts_ucb1        0.074   0.033       0.468    0.092     30.364 1.246 250
+          p3ht    mcts_greedy        0.023   0.035       0.436    0.016     31.500 1.757 250
+          p3ht     voi_greedy        0.005   0.036       0.428    0.016     32.412 0.109 250
+          p3ht       never_ei       -0.054   0.031       0.544    0.016     50.000 0.146 250
+          p3ht never_thompson       -0.062   0.031       0.536    0.020     50.000 0.160 250
+          p3ht never_quantile       -0.107   0.032       0.492    0.008     50.000 0.150 250
+          p3ht     never_ucb1       -0.108   0.032       0.492    0.000     50.000 0.143 250
+          p3ht   never_greedy       -0.236   0.030       0.364    0.000     50.000 0.162 250
+    perovskite   voi_quantile       -0.048   0.013       0.052    0.836      8.340 0.009 250
+    perovskite   voi_thompson       -0.051   0.016       0.080    0.816     11.216 0.015 250
+    perovskite         voi_ei       -0.061   0.014       0.052    0.852      9.832 0.012 250
+    perovskite       voi_ucb1       -0.067   0.009       0.024    0.856      7.708 0.008 250
+    perovskite        mcts_ei       -0.071   0.013       0.048    0.888     10.772 0.430 250
+    perovskite      mcts_mcts       -0.076   0.009       0.028    0.908      9.432 0.319 250
+    perovskite  mcts_quantile       -0.081   0.008       0.020    0.888      8.956 0.317 250
+    perovskite  mcts_thompson       -0.087   0.012       0.048    0.844     11.920 0.438 250
+    perovskite      mcts_ucb1       -0.091   0.007       0.008    0.904      8.956 0.296 250
+    perovskite    mcts_greedy       -0.163   0.019       0.096    0.760     23.456 1.050 250
+    perovskite     voi_greedy       -0.173   0.020       0.092    0.716     23.620 0.040 250
+    perovskite   never_greedy       -0.384   0.021       0.152    0.636     50.000 0.085 250
+    perovskite     never_ucb1       -0.428   0.017       0.096    0.764     50.000 0.081 250
+    perovskite       never_ei       -0.440   0.016       0.084    0.764     50.000 0.083 250
+    perovskite never_quantile       -0.454   0.015       0.072    0.744     50.000 0.083 250
+    perovskite never_thompson       -0.464   0.015       0.064    0.716     50.000 0.087 250
+
+Paired difference in net utility, picker - never_ei (same stopping rule 'never', same seeds):
+       dataset         policy   diff    se      z   n
+crossed_barrel never_quantile -0.052 0.035 -1.502 250
+crossed_barrel     never_ucb1 -0.081 0.037 -2.174 250
+crossed_barrel never_thompson -0.112 0.038 -2.952 250
+crossed_barrel   never_greedy -0.125 0.039 -3.246 250
+          p3ht never_thompson -0.008 0.041 -0.185 250
+          p3ht never_quantile -0.053 0.042 -1.270 250
+          p3ht     never_ucb1 -0.054 0.044 -1.210 250
+          p3ht   never_greedy -0.182 0.041 -4.393 250
+    perovskite   never_greedy  0.055 0.025  2.189 250
+    perovskite     never_ucb1  0.012 0.023  0.516 250
+    perovskite never_quantile -0.014 0.021 -0.671 250
+    perovskite never_thompson -0.025 0.021 -1.176 250
+
+Paired difference in net utility, picker - voi_ei (same stopping rule 'voi', same seeds):
+       dataset       policy   diff    se      z   n
+crossed_barrel     voi_ucb1 -0.008 0.043 -0.190 250
+crossed_barrel   voi_greedy -0.014 0.041 -0.343 250
+crossed_barrel voi_quantile -0.041 0.041 -1.016 250
+crossed_barrel voi_thompson -0.044 0.042 -1.046 250
+          p3ht voi_quantile -0.071 0.038 -1.845 250
+          p3ht voi_thompson -0.114 0.040 -2.846 250
+          p3ht     voi_ucb1 -0.157 0.043 -3.671 250
+          p3ht   voi_greedy -0.383 0.046 -8.260 250
+    perovskite voi_quantile  0.013 0.015  0.872 250
+    perovskite voi_thompson  0.011 0.020  0.516 250
+    perovskite     voi_ucb1 -0.006 0.016 -0.391 250
+    perovskite   voi_greedy -0.111 0.023 -4.767 250
+
+Paired difference in net utility, picker - mcts_mcts (same stopping rule 'mcts', same seeds):
+       dataset        policy   diff    se      z   n
+crossed_barrel       mcts_ei  0.046 0.042  1.096 250
+crossed_barrel   mcts_greedy  0.003 0.042  0.063 250
+crossed_barrel mcts_quantile -0.016 0.040 -0.393 250
+crossed_barrel     mcts_ucb1 -0.020 0.039 -0.499 250
+crossed_barrel mcts_thompson -0.083 0.042 -1.948 250
+          p3ht       mcts_ei  0.067 0.038  1.769 250
+          p3ht mcts_quantile  0.055 0.040  1.381 250
+          p3ht mcts_thompson -0.045 0.041 -1.104 250
+          p3ht     mcts_ucb1 -0.210 0.045 -4.668 250
+          p3ht   mcts_greedy -0.261 0.048 -5.406 250
+    perovskite       mcts_ei  0.005 0.016  0.293 250
+    perovskite mcts_quantile -0.005 0.013 -0.416 250
+    perovskite mcts_thompson -0.011 0.015 -0.742 250
+    perovskite     mcts_ucb1 -0.016 0.011 -1.408 250
+    perovskite   mcts_greedy -0.087 0.021 -4.066 250
+
+Paired difference in net utility, policy - one-step rule (voi_ei):
+       dataset         policy   diff    se       z   n
+crossed_barrel        mcts_ei  0.041 0.025   1.645 250
+crossed_barrel    mcts_greedy -0.003 0.041  -0.063 250
+crossed_barrel      mcts_mcts -0.005 0.041  -0.128 250
+crossed_barrel       voi_ucb1 -0.008 0.043  -0.190 250
+crossed_barrel     voi_greedy -0.014 0.041  -0.343 250
+crossed_barrel  mcts_quantile -0.021 0.042  -0.496 250
+crossed_barrel      mcts_ucb1 -0.025 0.043  -0.580 250
+crossed_barrel   voi_quantile -0.041 0.041  -1.016 250
+crossed_barrel   voi_thompson -0.044 0.042  -1.046 250
+crossed_barrel  mcts_thompson -0.088 0.044  -2.005 250
+crossed_barrel       never_ei -0.098 0.037  -2.644 250
+crossed_barrel never_quantile -0.150 0.040  -3.754 250
+crossed_barrel     never_ucb1 -0.178 0.043  -4.133 250
+crossed_barrel never_thompson -0.210 0.042  -4.969 250
+crossed_barrel   never_greedy -0.223 0.042  -5.273 250
+          p3ht        mcts_ei -0.039 0.022  -1.713 250
+          p3ht  mcts_quantile -0.050 0.036  -1.413 250
+          p3ht   voi_quantile -0.071 0.038  -1.845 250
+          p3ht      mcts_mcts -0.105 0.039  -2.684 250
+          p3ht   voi_thompson -0.114 0.040  -2.846 250
+          p3ht  mcts_thompson -0.150 0.043  -3.517 250
+          p3ht       voi_ucb1 -0.157 0.043  -3.671 250
+          p3ht      mcts_ucb1 -0.315 0.043  -7.325 250
+          p3ht    mcts_greedy -0.366 0.047  -7.845 250
+          p3ht     voi_greedy -0.383 0.046  -8.260 250
+          p3ht       never_ei -0.443 0.035 -12.668 250
+          p3ht never_thompson -0.450 0.042 -10.844 250
+          p3ht never_quantile -0.496 0.042 -11.842 250
+          p3ht     never_ucb1 -0.496 0.044 -11.397 250
+          p3ht   never_greedy -0.624 0.042 -14.810 250
+    perovskite   voi_quantile  0.013 0.015   0.872 250
+    perovskite   voi_thompson  0.011 0.020   0.516 250
+    perovskite       voi_ucb1 -0.006 0.016  -0.391 250
+    perovskite        mcts_ei -0.010 0.015  -0.654 250
+    perovskite      mcts_mcts -0.014 0.015  -0.930 250
+    perovskite  mcts_quantile -0.020 0.014  -1.391 250
+    perovskite  mcts_thompson -0.026 0.018  -1.425 250
+    perovskite      mcts_ucb1 -0.030 0.015  -1.977 250
+    perovskite    mcts_greedy -0.101 0.022  -4.532 250
+    perovskite     voi_greedy -0.111 0.023  -4.767 250
+    perovskite   never_greedy -0.323 0.024 -13.692 250
+    perovskite     never_ucb1 -0.366 0.022 -16.813 250
+    perovskite       never_ei -0.378 0.020 -18.720 250
+    perovskite never_quantile -0.392 0.020 -19.221 250
+    perovskite never_thompson -0.403 0.019 -20.909 250

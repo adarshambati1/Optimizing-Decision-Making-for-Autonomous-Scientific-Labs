@@ -1,0 +1,23 @@
+{
+ "params": {
+  "c_ucb": 0.8259113171285734,
+  "kappa": 2.150082348587305,
+  "n_measure": 6,
+  "max_depth": 6,
+  "min_visits": 7,
+  "lam": 1.0139020884481613
+ },
+ "default": {
+  "c_ucb": 0.5,
+  "kappa": 2.0,
+  "n_measure": 6,
+  "max_depth": 6,
+  "min_visits": 5,
+  "lam": 1.0
+ },
+ "pools": "synthetic",
+ "iters": 6,
+ "samples": 16,
+ "elite": 4,
+ "campaigns": 60
+}

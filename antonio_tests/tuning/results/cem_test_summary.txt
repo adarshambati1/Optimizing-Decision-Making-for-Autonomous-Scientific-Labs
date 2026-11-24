@@ -1,0 +1,23 @@
+       dataset             policy  net_utility  net_se   hit  experiments   sec
+crossed_barrel      mcts_cem_real        0.265   0.032 0.560       20.108 1.301
+crossed_barrel mcts_cem_synthetic        0.339   0.031 0.632       19.908 1.290
+crossed_barrel       mcts_default        0.293   0.030 0.592       20.808 1.309
+          p3ht      mcts_cem_real        0.261   0.032 0.516       16.708 0.799
+          p3ht mcts_cem_synthetic        0.354   0.030 0.604       16.280 0.783
+          p3ht       mcts_default        0.283   0.032 0.532       16.156 0.781
+    perovskite      mcts_cem_real       -0.062   0.011 0.040        9.064 0.332
+    perovskite mcts_cem_synthetic       -0.091   0.008 0.012        9.348 0.387
+    perovskite       mcts_default       -0.076   0.009 0.028        9.432 0.323
+
+Paired vs. default MCTS:
+  mcts_cem_real      crossed_barrel  -0.028  z = -0.7
+  mcts_cem_real      p3ht            -0.022  z = -0.5
+  mcts_cem_real      perovskite      +0.014  z = +0.9
+  mcts_cem_synthetic crossed_barrel  +0.046  z = +1.2
+  mcts_cem_synthetic p3ht            +0.070  z = +1.7
+  mcts_cem_synthetic perovskite      -0.016  z = -1.3
+
+Settings:
+  mcts_default: {"c_ucb": 0.5, "kappa": 2.0, "n_measure": 6, "max_depth": 6, "min_visits": 5, "lam": 1.0}
+  mcts_cem_real: {"c_ucb": 0.2689457988513825, "kappa": 2.1348426509014184, "n_measure": 8, "max_depth": 4, "min_visits": 4, "lam": 1.1421074158121098}
+  mcts_cem_synthetic: {"c_ucb": 0.8259113171285734, "kappa": 2.150082348587305, "n_measure": 6, "max_depth": 6, "min_visits": 7, "lam": 1.0139020884481613}
