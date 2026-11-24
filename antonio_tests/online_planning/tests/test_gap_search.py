@@ -25,11 +25,11 @@ def _beliefs():
 
 
 def test_upper_bound_covers_the_clairvoyant_value():
-    """1 - prod(1 - p_k) >= P(some f_k >= tau), checked by sampling the GP posterior."""
+    """The bound on P(some f_k >= tau) covers the truth, checked by sampling the GP posterior."""
     held, total = 0, 0
     for state, mu, Sig, av in _beliefs():
         gs = GapSearch(state.model)
-        bound = 1 - np.prod(1 - gs.p_good(mu, np.diag(Sig)))
+        bound = gs.p_any_bound(mu, Sig)
         L = np.linalg.cholesky(Sig + 1e-9 * np.eye(len(mu)))
         F = mu[None] + np.random.default_rng(0).standard_normal((20_000, len(mu))) @ L.T
         p_any = np.mean((F >= state.model.tau).any(1))
@@ -43,7 +43,29 @@ def test_bounds_bracket_a_deeper_search():
         gs, fs = GapSearch(state.model), ForwardSearch(state.model, n_actions=4)
         u2 = fs.value(mu, Sig, av, 2)
         var = np.diag(Sig)
-        assert gs.lower(mu, var) <= u2 + 1e-12 <= gs.upper(mu, var) + 1e-9
+        assert gs.lower(mu, var) <= u2 + 1e-12 <= gs.upper(mu, Sig) + 1e-9
+
+
+def test_upper_bound_holds_under_strong_negative_correlation():
+    """The counterexample to the product-only bound: two coin-flip candidates whose scores
+    are strongly negatively correlated. The bound must cover the clairvoyant value and
+    every value a real measuring policy achieves."""
+    state, _, _, _ = _belief("p3ht", n_obs=5, seed=0)
+    m = state.model
+    for rho in (0.0, -0.5, -0.9, -0.99):
+        mu = np.array([m.tau, m.tau])
+        Sig = np.array([[1.0, rho], [rho, 1.0]])
+        gs = GapSearch(m)
+        ub = gs.upper(mu, Sig)
+        F = mu + np.random.default_rng(0).standard_normal((200_000, 2)) @ np.linalg.cholesky(Sig + 1e-12 * np.eye(2)).T
+        clair = (m.payoff - m.commit_cost) * np.mean((F >= m.tau).any(1))
+        best = max(ForwardSearch(m, n_actions=2).value(mu, Sig, np.array([True, True]), d) for d in (1, 2, 3))
+        assert ub >= clair - 0.005 and ub >= best - 1e-9, (rho, ub, clair, best)
+    # with no negative correlation it is exactly the product (Slepian) bound
+    state, mu, Sig, av = _belief("crossed_barrel", n_obs=3, seed=1)
+    pos = np.abs(Sig)
+    gs = GapSearch(state.model)
+    assert np.isclose(gs.p_any_bound(mu, pos), 1 - np.prod(1 - gs.p_good(mu, np.diag(pos))))
 
 
 def test_no_search_is_the_one_step_test():

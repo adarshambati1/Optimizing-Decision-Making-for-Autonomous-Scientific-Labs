@@ -11,14 +11,16 @@ so the planner only experiments when it can show experimenting beats stopping.
 
 Bounds on the value of a GP belief b (net utility from here on, gamma = 1):
   lower  U_lo(b) = V_stop(b): stopping now is always available.
-  upper  U_hi(b) = (V - C_commit) * (1 - prod_k (1 - p_k)),  p_k = P(f_k >= tau).
+  upper  U_hi(b) = (V - C_commit) * B(b),  with B(b) >= P(some f_k >= tau).
          An agent that saw every true score for free earns at most V - C_commit when
          some candidate meets spec and 0 otherwise, so the optimum is at most
          (V - C_commit) P(some f_k >= tau). For Gaussian scores with nonnegative
-         correlations, Slepian's inequality gives P(some f_k >= tau) <= 1 - prod(1 - p_k).
-         The GP prior's correlations are nonnegative; posterior ones nearly always
-         are, but this is not guaranteed (the tests check how often the bound holds).
-         The product runs over the working set, as everywhere else in the search.
+         correlations, Slepian's inequality gives P(some f_k >= tau) <= 1 - prod(1 - p_k),
+         p_k = P(f_k >= tau). GP posteriors can have negative correlations, where that
+         product can undershoot, so B(b) applies the product only within groups of
+         candidates with no negatively correlated pair and adds the groups up (union
+         bound): valid for any correlation structure (p_any_bound). It runs over the
+         working set, as everywhere else in the search.
 Stop is an action whose value is known exactly (lower = upper = V_stop).
 
 Observations of measure(k), as in forward search: fail (probability q, belief
@@ -55,14 +57,48 @@ class GapSearch(ForwardSearch):
     def lower(self, mu, var):
         return self.stop_value(mu, var)
 
-    def upper(self, mu, var):
+    def p_any_bound(self, mu, Sigma, p_min: float = 1e-4):
+        """A valid upper bound on P(some f_k >= tau), for any correlation structure.
+
+        Slepian's inequality gives P(some) <= 1 - prod_k (1 - p_k) only when no pair
+        of scores is negatively correlated. So: split the candidates into groups with
+        no negatively correlated pair (greedy coloring of the "negative correlation"
+        graph), apply the product bound inside each group, and add the groups up
+        (union bound). Candidates with p_k < p_min go straight into the union bound.
+        With no negative correlations this is exactly the product bound.
+        """
+        var = np.diag(Sigma)
+        p = self.p_good(mu, var)
+        big = np.flatnonzero(p >= p_min)
+        total = float(p[p < p_min].sum())
+        if len(big):
+            neg = Sigma[np.ix_(big, big)] < 0
+            if not neg.any():                                  # the common case: one group
+                total += 1.0 - np.prod(1.0 - p[big])
+            else:
+                # greedy coloring with bitmasks: group g's members must share no negative pair
+                rows = [int.from_bytes(np.packbits(r, bitorder="little").tobytes(), "little") for r in neg]
+                masks, members = [], []
+                for i, row in enumerate(rows):
+                    for gi, gm in enumerate(masks):
+                        if not (row & gm):
+                            masks[gi] |= 1 << i
+                            members[gi].append(i)
+                            break
+                    else:
+                        masks.append(1 << i)
+                        members.append([i])
+                pb = p[big]
+                total += sum(1.0 - np.prod(1.0 - pb[g]) for g in members)
+        return min(1.0, total)
+
+    def upper(self, mu, Sigma):
         m = self.m
-        p_any = 1.0 - np.prod(1.0 - self.p_good(mu, var))
-        return max(self.lower(mu, var), max(0.0, m.payoff - m.commit_cost) * p_any)
+        p_any = self.p_any_bound(mu, Sigma)
+        return max(self.lower(mu, np.diag(Sigma)), max(0.0, m.payoff - m.commit_cost) * p_any)
 
     def node(self, mu, Sigma, avail):
-        var = np.diag(Sigma)
-        return _Node(mu, Sigma, avail, self.lower(mu, var), self.upper(mu, var))
+        return _Node(mu, Sigma, avail, self.lower(mu, np.diag(Sigma)), self.upper(mu, Sigma))
 
     # ---- tree
     def expand(self, nd):

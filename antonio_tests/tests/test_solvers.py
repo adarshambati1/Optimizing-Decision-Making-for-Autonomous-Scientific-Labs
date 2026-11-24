@@ -93,6 +93,47 @@ def test_policy_runs_in_keiras_simulator():
     assert r["spend"] <= cfg.budget + 1e-9
 
 
+def test_tie_break_is_deterministic():
+    from abstraction import best_action
+    assert best_action([0.3, 0.5, 0.5 - 1e-16, -np.inf]) == 1
+    assert best_action([0.5 + 1e-16, 0.5, 0.2]) == 0
+    assert best_action([0.1, 0.2 + 1e-6, 0.2]) == 1          # a real gap is not a tie
+
+
+def test_equivalent_solvers_take_identical_actions():
+    """QMDP and the fast informed bound are identical on this problem (deterministic
+    transitions), so with a deterministic tie-break they must play identical campaigns."""
+    import pickle
+    import tempfile
+
+    import autolab.runner as runner
+    from abstraction import params_from_model
+    from autolab.datasets import load_pool
+    from autolab.pomdp import AgentModel, LabTask, TaskConfig
+    from policy import OfflinePOMDPPolicy
+
+    pool, cfg = load_pool("p3ht"), TaskConfig()
+    P = DiscretePOMDP(params_from_model(AgentModel.from_task(LabTask(pool, cfg)), n_slots=4, horizon=6))
+    paths = {}
+    for mt in ("qmdp", "fib"):
+        vf, _ = solve(P, mt)
+        fh = tempfile.NamedTemporaryFile(suffix=f"_{mt}.pkl", delete=False)
+        pickle.dump((P.p, vf), fh)
+        fh.close()
+        paths[mt] = fh.name
+    old = runner.make_policy
+    runner.make_policy = lambda name, **kw: OfflinePOMDPPolicy(**kw)
+    try:
+        for seed in range(12):
+            a = runner.run_episode(pool, cfg, "pomdp", seed, {"path": paths["qmdp"]})
+            b = runner.run_episode(pool, cfg, "pomdp", seed, {"path": paths["fib"]})
+            assert a["net_utility"] == b["net_utility"] and a["n_measure"] == b["n_measure"], seed
+    finally:
+        runner.make_policy = old
+        for p in paths.values():
+            os.unlink(p)
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

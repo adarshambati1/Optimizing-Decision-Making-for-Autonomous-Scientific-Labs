@@ -27,8 +27,8 @@ with a paired z-score; |z| ≥ 2 is treated as significant.
 | Folder | Book | What it does | Headline result |
 |---|---|---|---|
 | [this folder (top level)](#chapter-21-offline-pomdp-solvers) | ch. 21 | 9 offline POMDP solvers (QMDP, fast informed bound, fast lower bound, PBVI, randomized PBVI, sawtooth bound, point selection, sawtooth heuristic search, triangulated value functions) on a 177-state discrete version of the problem | Valid bounds in seconds, but no solver beats the one-step rule, and 8 of 9 fail on P3HT by over-experimenting |
-| [`offline_rl/`](offline_rl/README.md) | 16, 17, 18, A.14 | 5 offline RL methods learned from a fixed log of 3,600 campaigns: importance-sampling evaluation, behavioral cloning, batch Q-learning, maximum-likelihood and Bayesian learned models | Cloning MCTS beats MCTS. Batch Q-learning beats its data on made-up pools but inherits the gate's Perovskite failure. Importance sampling is unreliable over 10–50-decision campaigns |
-| [`online_planning/`](online_planning/README.md) | ch. 22 | Forward search, sparse sampling, determinized sparse tree search, gap heuristic search | Deeper lookahead than one step barely helps. All four tie or beat MCTS |
+| [`offline_rl/`](offline_rl/README.md) | 16, 17, 18, A.14 | 5 offline RL methods learned from a fixed log of 3,600 campaigns: importance-sampling evaluation, behavioral cloning, batch Q-learning, maximum-likelihood and Bayesian learned models | Cloning MCTS beats MCTS on Crossed barrel (not significantly elsewhere). Batch Q-learning beats its data on made-up pools but inherits the gate's Perovskite failure. Importance sampling is unreliable over 10–50-decision campaigns |
+| [`online_planning/`](online_planning/README.md) | ch. 22 | Forward search, sparse sampling, determinized sparse tree search, gap heuristic search | Deeper lookahead than one step barely helps. Forward, determinized and gap search tie or beat MCTS; sparse sampling loses to it on Perovskite |
 | [`exploration/`](exploration/README.md) | 15.3–15.4 | Greedy, quantile, UCB1 and Thompson sampling as the way to *pick* the experiment, under three stopping rules | None beats GP-EI as the picker |
 | [`validation/`](validation/README.md) | 14.3–14.4 | Robustness (agents in worlds that differ from their model) and trade analysis (experiments vs success, Pareto frontier) | The simple planners are the most robust. Adaptive stopping beats any fixed budget |
 | [`tuning/`](tuning/README.md) | 10.4 | The cross-entropy method tuning six MCTS settings, tested on held-out seeds | Tuning does not significantly improve MCTS; its defaults sit on a flat optimum |
@@ -53,14 +53,20 @@ caveats.
    - It is also among the most robust agents when the world differs from its model
      ([`validation/`](validation/README.md)).
 
-3. **MCTS's stop decision, paired with GP-EI's pick, beats MCTS.** Three independent
-   results show this:
-   - the behavioral clone of MCTS's stopping decision ([`offline_rl/`](offline_rl/README.md))
-   - MCTS stopping with GP-EI picking ([`exploration/`](exploration/README.md))
-   - every ch. 22 planner doing as well or better when GP-EI picks
-     ([`online_planning/`](online_planning/README.md))
+3. **Pairing MCTS's stop decision with GP-EI's pick does at least as well as MCTS,
+   but this is significant only on Crossed barrel.**
+   - The behavioral clone of MCTS's stopping decision beats MCTS on Crossed barrel
+     (+0.10, z = 2.4) and leans ahead on P3HT (+0.07, z = 1.6)
+     ([`offline_rl/`](offline_rl/README.md)).
+   - MCTS stopping with GP-EI picking leans ahead on P3HT and Crossed barrel, but not
+     significantly (z = 1.8 and 1.1) ([`exploration/`](exploration/README.md)). The clone
+     imitates this same policy, so these two are not independent; they score the same on
+     P3HT (0.350).
+   - Separately, no ch. 22 planner is significantly worse when GP-EI picks its experiment,
+     and 2 of 21 comparisons are significantly better
+     ([`online_planning/`](online_planning/README.md)).
 
-   The clone and the second agent even score the same on P3HT (0.350).
+   The direction is consistent, but most individual comparisons are within noise.
 
 4. **The right amount of experimenting depends on the pool.**
    - Crossed barrel (600 candidates) rewards experimenting more; P3HT and Perovskite reward
@@ -94,6 +100,28 @@ caveats.
      its reading model is re-estimated from data, so the cause is its structure, not
      miscalibration.
 
+## Results status: fixes after an external review
+
+An outside review found five issues; all were confirmed and fixed. **The saved results in
+the folders below were produced before these fixes. Reruns are pending.**
+
+1. **Shared simulator (Keira's `pomdp.py`):** a reading that triggered a GP
+   hyperparameter refit went into the fit before its outlier check. It affected 2–8% of
+   refits (5–10% of one-step-rule campaigns, 15–57% of GP-EI campaigns). Now it is
+   checked first; regression test in `keira tests/tests/test_core.py`. **Measured
+   impact on GP-EI, MCTS and the one-step rule (250 paired seeds): every change within
+   noise (|z| ≤ 1.8).** MCTS and the one-step rule move by ≤ 0.007; GP-EI on P3HT moves
+   most (+0.05, z = 1.8). Rankings and conclusions are unchanged. The 20%-outlier
+   robustness test is the result most likely to shift.
+2. **QMDP vs. FIB (ch. 21):** they differed only through tie-breaking. Ties are now
+   deterministic, with a test (see the ch. 21 section).
+3. **Gap search's upper bound** could undershoot under negative correlations. It is now
+   valid for any correlation structure, with a test (`online_planning/`).
+4. **`load_data.split_data`** puts replicates of the same recipe in both train and test.
+   It was never used downstream; its call in `main.py` is commented out with a note.
+5. **README claims** that overstated the tables were corrected: "every planner beats or
+   ties MCTS", "cloning MCTS beats MCTS", and finding 3 above.
+
 ## Open threads and untested hypotheses
 
 These were raised along the way and not yet run:
@@ -122,7 +150,7 @@ These were raised along the way and not yet run:
 Requirements: numpy, scipy, pandas and matplotlib, the same as `keira tests/`. The `cs238`
 conda environment has them.
 
-Tests (41, all passing, about 30 seconds in total):
+Tests (44, all passing, about 45 seconds in total; Keira's `keira tests/tests/test_core.py` has 5 more):
 
 ```bash
 for t in antonio_tests/tests/test_solvers.py antonio_tests/offline_rl/tests/test_logger.py antonio_tests/offline_rl/tests/test_methods.py antonio_tests/online_planning/tests/test_*.py antonio_tests/exploration/tests/test_pickers.py antonio_tests/validation/tests/test_*.py antonio_tests/tuning/tests/test_cem.py; do python "$t"; done
@@ -199,7 +227,12 @@ they approximate the value function.
   bounds sit above the exact value, lower bounds below it. PBVI, Perseus, point selection
   and sawtooth search land within ~0.003 of it.
 - **QMDP and FIB are identical here.** FIB only improves on QMDP when transitions are
-  random, and in this problem they are deterministic.
+  random, and in this problem they are deterministic. *Their different rows in the
+  simulator table below are tie-breaking noise, not a real difference.* The policies'
+  top actions were often exactly tied, and plain `argmax` broke the ties by 1e-16
+  roundoff (outcomes differed on 148–167 of 250 seeds per dataset, never significantly).
+  Ties now break deterministically (`abstraction.best_action`), and a test checks that
+  the two play identical campaigns; the table is pending a rerun.
 - **The sawtooth bound is a little looser than FIB at the test beliefs:** away from its
   sampled points it falls back on interpolating the corner values, which is looser than FIB.
 - **Lower-bound methods make the better policies.** Their lookahead policies earn

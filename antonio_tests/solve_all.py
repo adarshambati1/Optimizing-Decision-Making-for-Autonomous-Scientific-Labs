@@ -34,7 +34,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(HERE), "keira tests"))
 import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
 
-from abstraction import DiscretePOMDP, params_from_model  # noqa: E402
+from abstraction import DiscretePOMDP, best_action, params_from_model  # noqa: E402
 from autolab.datasets import DATASETS, load_pool  # noqa: E402
 from autolab.pomdp import AgentModel, LabTask, TaskConfig  # noqa: E402
 from solvers import ALL_METHODS, sample_beliefs, solve  # noqa: E402
@@ -54,7 +54,7 @@ def rollout_value(P, vf, b0, rng) -> float:
     for _ in range(P.H + 3):
         if s == P.term:
             break
-        a = int(P.lookahead(b, vf.values).argmax())
+        a = best_action(P.lookahead(b, vf.values))
         s, o, r = P.step(s, a, rng)
         total += r
         b = P.update(b, a, o)

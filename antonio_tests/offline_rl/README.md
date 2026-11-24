@@ -181,8 +181,9 @@ Figures: `results/figures/benchmark.png`, `results/figures/ope.png`.
 | Batch Q-learning (fitted) | 0.28 | −0.29 | 0.34 |
 | Learned models (6 variants) | 0.02 – 0.08 | −0.09 – −0.10 | 0.28 – 0.32 |
 
-- **Behavioral cloning of MCTS beats MCTS itself** on Crossed barrel (+0.10, z = 2.4)
-  and P3HT (+0.07, z = 1.6), and ties it on Perovskite. It is also the best policy
+- **Behavioral cloning of MCTS does better than MCTS itself on Crossed barrel**
+  (+0.10, z = 2.4, significant). On P3HT it leans the same way but is not significant
+  (+0.07, z = 1.6), and it ties on Perovskite. It is also the best policy
   overall on Crossed barrel (+0.09 over the one-step rule, z = 3.3) while running
   8–16× faster than MCTS. A possible reason, not tested: the clone copies only
   MCTS's *stopping* decision, and pairs it with GP-EI's pick of *which* experiment, a

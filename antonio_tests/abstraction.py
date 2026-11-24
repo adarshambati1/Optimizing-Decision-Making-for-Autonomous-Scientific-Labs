@@ -39,6 +39,16 @@ from scipy.special import ndtr, ndtri
 
 OBS_NONE, OBS_LOW, OBS_HIGH = 0, 1, 2
 N_OBS = 3
+TIE_TOL = 1e-9
+
+
+def best_action(q: np.ndarray, tol: float = TIE_TOL) -> int:
+    """argmax with a deterministic tie-break: among actions within `tol` of the best,
+    take the lowest index. Plain argmax lets 1e-16 roundoff decide between actions
+    that are exactly tied in theory (e.g. QMDP and the fast informed bound, which are
+    identical on this problem, would otherwise pick different candidates)."""
+    q = np.asarray(q, float)
+    return int(np.flatnonzero(q >= q.max() - tol)[0])
 
 
 @dataclass(frozen=True)

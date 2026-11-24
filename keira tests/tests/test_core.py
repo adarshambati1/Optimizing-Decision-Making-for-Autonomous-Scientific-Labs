@@ -37,6 +37,21 @@ def test_outlier_check():
     assert is_good_reading(0.0, 1.0, 50.0, 0.1, rho=0.0, out_var=9.0)
 
 
+def test_rejected_reading_never_enters_the_hyperparameter_fit():
+    """A reading that triggers a refit is outlier-checked before the fit, not after."""
+    from autolab.pomdp import AgentModel, AgentState, LabTask
+    pool = load_pool("p3ht")
+    model = AgentModel.from_task(LabTask(pool, TaskConfig()))
+    st = AgentState(pool.X, model, np.random.default_rng(0))
+    default_ls = st.hyper.ls.copy()
+    for k in range(4):                                  # four ordinary readings: no fit yet
+        st.observe(k, False, float(pool.f[k]))
+    st.observe(4, False, 50.0)                          # 5th reading triggers the first refit; it is absurd
+    assert st.good[-1] is False or st.good[-1] == False  # noqa: E712  (rejected by the outlier check)
+    # with only 4 accepted readings there is nothing to fit: hyperparameters stay at the default
+    assert np.allclose(st.hyper.ls, default_ls)
+
+
 def test_datasets_load():
     for n in DATASETS:
         p = load_pool(n)

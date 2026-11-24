@@ -37,7 +37,7 @@ if ANT not in sys.path:
 import numpy as np  # noqa: E402
 from scipy.special import ndtr  # noqa: E402
 
-from abstraction import AbstractParams, DiscretePOMDP  # noqa: E402
+from abstraction import AbstractParams, DiscretePOMDP, best_action  # noqa: E402
 from autolab.policies import EIPolicy, Policy, terminal_action  # noqa: E402
 from autolab.pomdp import TaskConfig  # noqa: E402
 from methods import NOISE_BINS, estimate_reading_model  # noqa: E402
@@ -116,7 +116,7 @@ class LearnedModelPolicy(Policy):
         for i, k in enumerate(slots):
             if not meas[k] or n_left == 0:
                 q[P.measure_actions[i]] = -np.inf
-        a = int(q.argmax())
+        a = best_action(q)
         if a in P.measure_actions:
             return self._ei.act(state) if self.mode == "stop_only" else ("measure", int(slots[a]))
         if self.mode == "stop_only":         # the shared terminal rule, like every stop-only agent

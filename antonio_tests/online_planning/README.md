@@ -65,9 +65,10 @@ Two ways to use the search:
   ties or beats it elsewhere (depth 3 on Perovskite: +0.034, z = 2.0). That fits the
   one-step rule's earlier lead over MCTS. Exact expectations over readings seem to
   serve this problem better than MCTS's sampled tree.
-- **Letting GP-EI pick the experiment is never worse** and tends to be better (+0.03
-  at depth 2, not significant). This lines up with the offline-RL result that cloning
-  MCTS's *stopping* decision and pairing it with GP-EI's pick beat MCTS itself.
+- **Letting GP-EI pick the experiment is never significantly worse** and tends to be
+  better (+0.03 at depth 2, not significant). This lines up with the offline-RL result
+  that a clone of MCTS's *stopping* decision, paired with GP-EI's pick, did better than
+  MCTS on Crossed barrel.
 
 ## Sparse sampling (22.4)
 
@@ -183,12 +184,23 @@ Algorithm 22.4 on the GP belief:
 
 Bounds on a belief's value:
 - **Lower:** V_stop(b), since stopping is always available.
-- **Upper:** (V − C_commit)·(1 − ∏ₖ(1 − pₖ)), with pₖ = P(candidate k meets spec).
-  Even an agent that saw every true score for free could not earn more than V − C_commit
-  times the chance that some candidate meets spec. By Slepian's inequality, the product
-  form bounds that chance when scores are nonnegatively correlated, which holds for the
-  GP prior but is not guaranteed for posteriors. **The tests sample the posterior and
-  find the bound holds on all 24 beliefs checked**, across the three datasets.
+- **Upper:** (V − C_commit) × a bound on P(some candidate meets spec). Even an agent that
+  saw every true score for free could not earn more than V − C_commit times that chance.
+  - By Slepian's inequality, 1 − ∏ₖ(1 − pₖ) bounds the chance when no two scores are
+    negatively correlated, with pₖ = P(candidate k meets spec).
+  - GP posteriors can have negative correlations, and then the product can undershoot.
+    With two coin-flip candidates at correlation −0.9, a real policy earned 0.68 against
+    a product bound of 0.675.
+  - **So the bound now applies the product only within groups of candidates with no
+    negatively correlated pair, and adds the groups up (union bound).** That is valid for
+    any correlation structure, and identical to the product when nothing is negatively
+    correlated.
+  - On real posteriors it is rarely looser: median ratio 1.0, at most 24% looser.
+  - The tests cover the clairvoyant value on 24 sampled posteriors and on the
+    negative-correlation counterexample.
+  - *The gap-search numbers below were produced with the earlier product-only bound;
+    rerunning with the valid bound is pending. The new bound also makes the search 2–3×
+    slower (0.9–1.6 s per campaign).*
 
 Observations are the same as forward search (fail, or 5 quadrature readings).
 **With zero searches, the decision is exactly depth-1 forward search**, which the tests
@@ -229,12 +241,17 @@ check. So everything beyond the one-step rule comes from searching.
    experimenting more, not from planning better.** Determinizing the same search
    removes both the extra experiments and the gain, and the extra experiments cost
    it on the two smaller pools. How much to experiment depends on the dataset.
-3. **Every planner does as well or better when GP-EI picks the experiment.** The
-   planners add value only through the stop-or-continue decision. This matches the
-   offline-RL finding that a clone of MCTS's stopping decision, paired with GP-EI,
-   beats MCTS.
-4. **Every planner here beats or ties MCTS**, most clearly on P3HT (+0.07 to +0.12).
-   Exact or determinized expectations over readings serve this problem better than
-   MCTS's sampled tree.
+3. **Letting GP-EI pick the experiment is never significantly worse for any planner.**
+   Across 21 paired comparisons (7 planners × 3 datasets), letting the planner pick its
+   own experiment instead never wins significantly (lowest z = −1.0). GP-EI picking is
+   significantly better in only 2 of them (sparse depth 3 on Crossed barrel, z = 2.0;
+   determinized depth 2 on P3HT, z = 2.0); the rest are within noise. The planners'
+   value comes mainly from the stop-or-continue decision.
+4. **Forward search, determinized search and gap search tie or beat MCTS; sparse
+   sampling does not.** Forward search beats MCTS on P3HT (+0.09 to +0.12, z = 2.2–3.1)
+   and ties or beats it elsewhere. **Four sparse-sampling variants lose to MCTS on
+   Perovskite** (−0.04 to −0.06, z = −2.4 to −3.7), because their over-experimenting
+   costs the most where giving up is right. Exact or determinized expectations over
+   readings serve this problem better than MCTS's sampled tree; sampled ones do not.
 5. **Cost:** the one-step rule is the cheapest. It is 1.6–5× cheaper than depth-2 forward
    search and up to ~230× cheaper than depth-3 sparse sampling (Perovskite).

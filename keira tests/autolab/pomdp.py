@@ -130,6 +130,12 @@ class AgentState:
         self.obs.append((k, y))
         self._since_refit += 1
         if len(self.obs) == self.model.min_fit_points or self._since_refit >= self.model.refit_every:
+            # Run the outlier check on this reading BEFORE it can enter the hyperparameter fit.
+            # (Previously refit() padded unchecked readings as accepted, so a reading the filter
+            # would reject could still shape the fitted GP.)
+            m, b = self.model, self.belief
+            self.good.append(is_good_reading(b.mu[k], b.Sigma[k, k], y, m.noise_var, m.outlier_prob,
+                                             m.outlier_var))
             self.refit()
         else:
             self._absorb(k, y)

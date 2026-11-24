@@ -60,12 +60,12 @@ Net utility (± ≈ 0.03):
   what each experiment finds, and through when the campaign stops.
 - **Greedy is by far the worst on P3HT** (−0.18 to −0.38). Measuring the highest mean
   never tests the uncertain candidates that might meet spec.
-- **MCTS's stop decision with GP-EI picking beats MCTS's own choice** (P3HT +0.07,
-  z = 1.8; Crossed barrel +0.05, z = 1.1). This is the third independent sign of the same
-  thing. The others were the behavioral clone of MCTS's stop decision (`offline_rl/`)
-  and every chapter 22 planner doing as well or better with GP-EI picking
-  (`online_planning/`). That clone and this agent make the same kind of decision, and
-  they score the same on P3HT (0.350 and 0.350).
+- **MCTS's stop decision with GP-EI picking leans ahead of MCTS's own choice**, but not
+  significantly (P3HT +0.07, z = 1.8; Crossed barrel +0.05, z = 1.1). It points the same
+  way as two related results: the behavioral clone of MCTS's stop decision
+  (`offline_rl/`; significant on Crossed barrel only), which imitates this same policy
+  and scores the same on P3HT (0.350 and 0.350), and the chapter 22 planners, which are
+  never significantly worse with GP-EI picking (`online_planning/`).
 
 **Bottom line:** for this problem, which experiment to run is a solved part. GP-EI is
 hard to beat, and the gains in this project all come from deciding when to stop.

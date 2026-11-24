@@ -19,12 +19,17 @@ def main():
     datasets = [df1, df2, df3, df4, df5]
 
     # split into train and test sets
-    train_sets = []
-    test_sets = []
-    for dataset in datasets:
-        train, test = split_data(dataset)
-        train_sets.append(train)
-        test_sets.append(test)
+    # DISABLED: split_data has a known bug. It samples individual rows, but several datasets
+    # contain replicate measurements of the same recipe, so the same recipe lands in both
+    # train and test (e.g. all 659 AgNP test rows and 348 of 360 Crossed barrel test rows
+    # share a recipe with train). Split by unique recipe before using this. The split was
+    # never used downstream; the simulators load data through keira tests/autolab/datasets.py.
+    # train_sets = []
+    # test_sets = []
+    # for dataset in datasets:
+    #     train, test = split_data(dataset)
+    #     train_sets.append(train)
+    #     test_sets.append(test)
 
     return 0
 

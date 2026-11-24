@@ -28,6 +28,7 @@ from scipy.special import ndtr  # noqa: E402
 
 from autolab.policies import Policy, terminal_action  # noqa: E402
 from autolab.utility import expected_commit_value  # noqa: E402
+from abstraction import best_action  # noqa: E402
 
 _CACHE: dict = {}
 
@@ -81,7 +82,7 @@ class OfflinePOMDPPolicy(Policy):
         for i, k in enumerate(slots):
             if not meas[k] or n_left == 0:
                 q[P.measure_actions[i]] = -np.inf
-        a = int(q.argmax())
+        a = best_action(q)
         if a in P.measure_actions:
             return ("measure", int(slots[a]))
         if a in P.commit_actions:
